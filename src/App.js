@@ -43,10 +43,6 @@ class App extends React.Component {
     newY -= move * directions[1];
     const maxWidth = window.innerWidth;
     const maxHeight = window.innerHeight;
-    if (this.state.pacManWalls) {
-      newX = (newX + maxWidth) % maxWidth;
-      newY = (newY + maxHeight) % maxHeight;
-    }
     this.setState({
       x: newX,
       y: newY
@@ -80,7 +76,8 @@ class App extends React.Component {
         togglePanel={this.togglePanel}/>
         <Player
         X={this.state.x}
-        Y={this.state.y} />
+        Y={this.state.y}
+        PacManWalls={this.state.pacManWalls}/>
       </div>
     )
   }
