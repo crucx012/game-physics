@@ -41,8 +41,6 @@ class App extends React.Component {
     let {x: newX,y: newY, move, directions} = this.state;
     newX += move * directions[0];
     newY -= move * directions[1];
-    const maxWidth = window.innerWidth;
-    const maxHeight = window.innerHeight;
     this.setState({
       x: newX,
       y: newY

@@ -22,7 +22,7 @@ class Panel extends React.Component {
         <div className="expand center" onClick={() => {togglePanel(!state.panelVisible)}}>
           <div style={arrowStyle}>{'➜'}</div>
         </div>
-        <div className="full right no-overflow">
+        <div className="full no-overflow">
           <div className="container">
             <div>X:</div>
             <div> {state.x}</div>
