@@ -11,11 +11,16 @@ class Panel extends React.Component {
     const style = {
       'marginLeft': left
     }
-    const char = state.panelVisible ? '<' : '>';
+    const arrowStyle = state.panelVisible ?
+    {
+      'transform': 'translate(20%, -50%) scale(-1,1)'
+    } : {
+      'transform': 'translate(20%, -50%)'
+    }
     return (
       <div className="panel" style={style}>
         <div className="expand center" onClick={() => {togglePanel(!state.panelVisible)}}>
-          <div>{char}</div>
+          <div style={arrowStyle}>{'➜'}</div>
         </div>
         <div className="full right no-overflow">
           <div className="container">
@@ -24,7 +29,7 @@ class Panel extends React.Component {
           </div>
           <div className="container">
             <div>Y:</div>
-            <div> {state.y}</div>
+            <div> {-state.y}</div>
           </div>
           <div className="container">
             <div>Vertical:</div>
