@@ -1,43 +1,46 @@
 import React from 'react';
 import Player from './components/Player.jsx';
+import Panel from './components/Panel.jsx';
 import './App.css';
 
-let interval = {};
+let interval;
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      keys: [0, 0],
+      directions: [0, 0],
       x: 0,
       y: 0,
       move: 5,
-      pacManWalls: true
+      pacManWalls: true,
+      panelVisible: false
     }
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.move = this.move.bind(this);
+    this.togglePanel = this.togglePanel.bind(this);
   }
 
   handleKeyDown(event) {
-    let {keys: newKeys} = this.state;
+    let {directions: newDirections} = this.state;
     if (event.key === 'w' || event.key === "ArrowUp") {
-      newKeys[1]--;
+      newDirections[1]++;
     } else if (event.key === 'a' || event.key === "ArrowLeft") {
-      newKeys[0]--;
+      newDirections[0]--;
     } else if (event.key === 's' || event.key === "ArrowDown") {
-      newKeys[1]++;
+      newDirections[1]--;
     } else if (event.key === 'd' || event.key === "ArrowRight") {
-      newKeys[0]++;
+      newDirections[0]++;
     }
     this.setState({
-      keys: newKeys
+      directions: newDirections
     })
   }
 
   move() {
-    let {x: newX,y: newY, move, keys} = this.state;
-    newX += move * keys[0];
-    newY += move * keys[1];
+    let {x: newX,y: newY, move, directions} = this.state;
+    newX += move * directions[0];
+    newY -= move * directions[1];
     const maxWidth = window.innerWidth;
     const maxHeight = window.innerHeight;
     if (this.state.pacManWalls) {
@@ -50,11 +53,17 @@ class App extends React.Component {
     })
   }
 
+  togglePanel(isVisible) {
+    this.setState({
+      panelVisible: isVisible
+    })
+  }
+
   componentDidMount(){
     document.addEventListener("keydown", this.handleKeyDown);
     interval = setInterval(() => {
       this.move()
-    }, 100);
+    }, 15);
   }
 
 
@@ -66,6 +75,9 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
+        <Panel
+        state={this.state}
+        togglePanel={this.togglePanel}/>
         <Player
         X={this.state.x}
         Y={this.state.y} />
