@@ -12,6 +12,8 @@ class App extends React.Component {
       directions: [0, 0],
       x: 0,
       y: 0,
+      xOffset: (window.innerWidth / 2) - (50 / 2),
+      yOffset: (window.innerHeight / 2) - (50 / 2),
       move: 5,
       pacManWalls: true,
       panelVisible: false
@@ -41,9 +43,13 @@ class App extends React.Component {
     let {x: newX,y: newY, move, directions} = this.state;
     newX += move * directions[0];
     newY -= move * directions[1];
+    const newXOffset = (window.innerWidth / 2) - (50 / 2);
+    const newYOffset = (window.innerHeight / 2) - (50 / 2);
     this.setState({
       x: newX,
-      y: newY
+      y: newY,
+      xOffset: newXOffset,
+      yOffset: newYOffset
     })
   }
 

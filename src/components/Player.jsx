@@ -12,24 +12,28 @@ class Player extends React.Component {
 
   getMarkers(props) {
     let result = [];
-    let {x,y,pacManWalls} = this.props.state;
+    let {x,y,xOffset,yOffset,pacManWalls} = this.props.state;
+    x += xOffset;
+    y += yOffset;
     if (pacManWalls) {
       x = ((x % window.innerWidth) + window.innerWidth) % window.innerWidth;
       y = ((y % window.innerHeight) + window.innerHeight) % window.innerHeight;
     }
     for (let i = 0; i < 2; i++) {
       for (let j = 0; j < 2; j++){
+        let top = y;
         if (i > 0) {
-          y -= window.innerHeight;
+          top -= window.innerHeight;
         }
+        let left = x;
         if (j > 0) {
-          x -= window.innerWidth;
+          left -= window.innerWidth;
         }
-        const style = {
-          'marginTop': `${y}px`,
-          'marginLeft': `${x}px`,
-        }
-        if (this.isVisible(y,x)) {
+        if (this.isVisible(top,left)) {
+          const style = {
+            'marginTop': `${top}px`,
+            'marginLeft': `${left}px`,
+          }
           result.push(<div key={`player${i}${j}`} className="blue circle" style={style}></div>)
         }
       }
