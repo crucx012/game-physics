@@ -73,9 +73,7 @@ class App extends React.Component {
         state={this.state}
         togglePanel={this.togglePanel}/>
         <Player
-        X={this.state.x}
-        Y={this.state.y}
-        PacManWalls={this.state.pacManWalls}/>
+        state={this.state} />
       </div>
     )
   }
