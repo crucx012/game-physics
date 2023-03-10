@@ -11,13 +11,17 @@ class Grid extends React.Component {
   }
 
   getMarkers(props) {
-    let {x,y} = this.props.state;
+    let {x,y,pacManWalls} = this.props.state;
     let size = 10;
-    let xPage = Math.abs(((Math.round(x / window.innerWidth) - .5) * window.innerWidth) % 100);
-    let yPage = Math.abs(((Math.round(y / window.innerHeight) - .5) * window.innerHeight) % 100);
-    let left = xPage - (size / 2);
-    let top = yPage - (size / 2);
-    return this.getClones(left, top);
+    let xPage = Math.abs(((Math.round(x / window.innerWidth) - .5) * window.innerWidth) % 100) - (size / 2);
+    let yPage = Math.abs(((Math.round(y / window.innerHeight) - .5) * window.innerHeight) % 100) - (size / 2);
+    if (pacManWalls) {
+      return this.getClones(xPage, yPage);
+    } else {
+      let left = xPage + (Math.round(x / 100) * 100) - x;
+      let top = yPage + (Math.round(y / 100) * 100) - y;
+      return this.getClones(left, top);
+    }
   }
 
   getClones(x,y) {

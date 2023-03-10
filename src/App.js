@@ -18,7 +18,7 @@ class App extends React.Component {
       move: 5,
       freeze: false,
       freezeUntil: new Date(),
-      pacManWalls: true,
+      pacManWalls: false,
       panelVisible: false
     }
     this.handleKeyDown = this.handleKeyDown.bind(this);

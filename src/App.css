@@ -41,6 +41,7 @@ body {
   width: 10%;
   z-index: 1;
   background-color: #302e36;
+  opacity: .9;
   transition: margin-left 1s;
 }
 
