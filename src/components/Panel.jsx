@@ -20,7 +20,7 @@ class Panel extends React.Component {
     return (
       <div className="panel" style={style}>
         <div className="expand no-overflow">
-          <div className="circle" onClick={() => {togglePanel(!state.panelVisible)}}>
+          <div className="medium circle" onClick={() => {togglePanel(!state.panelVisible)}}>
             <div className="center" style={arrowStyle}>{'➜'}</div>
           </div>
         </div>

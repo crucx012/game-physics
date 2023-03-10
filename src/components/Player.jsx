@@ -2,11 +2,10 @@ import React from 'react';
 
 class Player extends React.Component {
   render(props) {
-    let markers = this.getMarkers(props);
     if (this.props.state.freeze) return (<></>);
     return (
       <>
-        {markers}
+        {this.getMarkers(props)}
       </>
     );
   }
@@ -48,7 +47,7 @@ class Player extends React.Component {
         'marginLeft': `${left}px`,
       }
       return (
-        <div key={`player${i}${j}`} className="blue circle" style={style}></div>
+        <div key={`player${i}${j}`} className="medium blue circle" style={style}></div>
       );
     }
   }

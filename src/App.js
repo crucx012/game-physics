@@ -1,6 +1,7 @@
 import React from 'react';
-import Player from './components/Player.jsx';
 import Panel from './components/Panel.jsx';
+import Grid from './components/Grid.jsx';
+import Player from './components/Player.jsx';
 import './App.css';
 
 let interval;
@@ -106,6 +107,8 @@ class App extends React.Component {
         <Panel
         state={this.state}
         togglePanel={this.togglePanel}/>
+        <Grid
+        state={this.state}/>
         <Player
         state={this.state} />
       </div>
