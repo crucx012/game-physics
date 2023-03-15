@@ -2,11 +2,11 @@ import React from 'react';
 
 class Panel extends React.Component {
   render() {
-    let {state, togglePanel} = this.props;
-    return this.getVisiblePanel(state,togglePanel)
+    let {state, togglePanel, togglePacManWalls} = this.props;
+    return this.getVisiblePanel(state,togglePanel,togglePacManWalls)
   }
 
-  getVisiblePanel(state,togglePanel) {
+  getVisiblePanel(state,togglePanel,togglePacManWalls) {
     const left = state.panelVisible ? '0%' : '-10%'
     const style = {
       'marginLeft': left
@@ -36,6 +36,10 @@ class Panel extends React.Component {
           <div className="container">
             <div>Move:</div>
             <div> {state.directions[0]}, {state.directions[1]}</div>
+          </div>
+          <div className="container" onClick={() => {togglePacManWalls()}}>
+            <div>Pac-Man Walls:</div>
+            <div> {state.pacManWalls ? "ON" : "OFF"}</div>
           </div>
         </div>
       </div>

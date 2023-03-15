@@ -24,6 +24,7 @@ class App extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.move = this.move.bind(this);
     this.togglePanel = this.togglePanel.bind(this);
+    this.togglePacManWalls = this.togglePacManWalls.bind(this);
   }
 
   handleKeyDown(event) {
@@ -89,6 +90,13 @@ class App extends React.Component {
     })
   }
 
+  togglePacManWalls() {
+    const newVal = !this.state.pacManWalls
+    this.setState({
+      pacManWalls: newVal
+    })
+  }
+
   componentDidMount(){
     document.addEventListener("keydown", this.handleKeyDown);
     interval = setInterval(() => {
@@ -106,7 +114,8 @@ class App extends React.Component {
       <div className="App">
         <Panel
         state={this.state}
-        togglePanel={this.togglePanel}/>
+        togglePanel={this.togglePanel}
+        togglePacManWalls={this.togglePacManWalls}/>
         <Grid
         state={this.state}/>
         <Player
