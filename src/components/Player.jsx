@@ -19,20 +19,20 @@ class Player extends React.Component {
       left += ((x % window.innerWidth) + window.innerWidth) % window.innerWidth;
       top += ((y % window.innerHeight) + window.innerHeight) % window.innerHeight;
     }
-    return this.getClones(left,top);
+    return this.getClones(left,top,size);
   }
 
-  getClones(x,y) {
+  getClones(x,y,size) {
     let result = [];
     for (let i = 0; i < 2; i++) {
       for (let j = 0; j < 2; j++){
-        result.push(this.getMarker(x,y,i,j))
+        result.push(this.getMarker(x,y,i,j,size))
       }
     }
     return result;
   }
 
-  getMarker(x,y,i,j) {
+  getMarker(x,y,i,j,size) {
     let top = y;
     if (i > 0) {
       top -= window.innerHeight;
@@ -41,7 +41,7 @@ class Player extends React.Component {
     if (j > 0) {
       left -= window.innerWidth;
     }
-    if (this.isVisible(top,left)) {
+    if (this.isVisible(top,left,size)) {
       const style = {
         'marginTop': `${top}px`,
         'marginLeft': `${left}px`,
@@ -52,9 +52,9 @@ class Player extends React.Component {
     }
   }
 
-  isVisible(top,left) {
-    return ((top >= 0 && top <= window.innerHeight) || (top + 50 >= 0 && top + 50 <= window.innerHeight))
-      && ((left >= 0 && left <= window.innerWidth) || (left + 50 >= 0 && left + 50 <= window.innerWidth))
+  isVisible(top,left,size) {
+    return ((top >= 0 && top <= window.innerHeight) || (top + size >= 0 && top + size <= window.innerHeight))
+      && ((left >= 0 && left <= window.innerWidth) || (left + size >= 0 && left + size <= window.innerWidth))
   }
 }
 
