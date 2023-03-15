@@ -13,15 +13,13 @@ class Player extends React.Component {
   getMarkers(props) {
     let {x,y,xOffset,yOffset,pacManWalls} = this.props.state;
     let size = 50;
-
+    let left = xOffset - (size / 2);
+    let top = yOffset - (size / 2);
     if (pacManWalls) {
-      x = ((x % window.innerWidth) + window.innerWidth) % window.innerWidth;
-      y = ((y % window.innerHeight) + window.innerHeight) % window.innerHeight;
-    } else {
-      x = xOffset - (size / 2);
-      y = yOffset - (size / 2);
+      left += ((x % window.innerWidth) + window.innerWidth) % window.innerWidth;
+      top += ((y % window.innerHeight) + window.innerHeight) % window.innerHeight;
     }
-    return this.getClones(x,y);
+    return this.getClones(left,top);
   }
 
   getClones(x,y) {

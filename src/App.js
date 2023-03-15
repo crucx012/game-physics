@@ -15,10 +15,10 @@ class App extends React.Component {
       y: 0,
       xOffset: window.innerWidth / 2,
       yOffset: window.innerHeight / 2,
-      move: 5,
+      move: 1,
       freeze: false,
       freezeUntil: new Date(),
-      pacManWalls: false,
+      pacManWalls: true,
       panelVisible: false
     }
     this.handleKeyDown = this.handleKeyDown.bind(this);

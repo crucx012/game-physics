@@ -34,12 +34,8 @@ class Panel extends React.Component {
             <div> {-state.y}</div>
           </div>
           <div className="container">
-            <div>Vertical:</div>
-            <div> {state.directions[1]}</div>
-          </div>
-          <div className="container">
-            <div>Horiztonal: </div>
-            <div> {state.directions[0]}</div>
+            <div>Move:</div>
+            <div> {state.directions[0]}, {state.directions[1]}</div>
           </div>
         </div>
       </div>
