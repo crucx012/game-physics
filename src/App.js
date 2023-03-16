@@ -16,6 +16,7 @@ class App extends React.Component {
       xOffset: window.innerWidth / 2,
       yOffset: window.innerHeight / 2,
       move: 1,
+      moveMax: 30,
       freeze: false,
       freezeUntil: new Date(),
       pacManWalls: true,
@@ -31,12 +32,16 @@ class App extends React.Component {
     let {directions: newDirections} = this.state;
     if (event.key === 'w' || event.key === "ArrowUp") {
       newDirections[1]++;
+      newDirections[1] = Math.min(this.state.moveMax,newDirections[1]);
     } else if (event.key === 'a' || event.key === "ArrowLeft") {
       newDirections[0]--;
+      newDirections[0] = Math.max(-this.state.moveMax,newDirections[0]);
     } else if (event.key === 's' || event.key === "ArrowDown") {
       newDirections[1]--;
+      newDirections[1] = Math.max(-this.state.moveMax,newDirections[1]);
     } else if (event.key === 'd' || event.key === "ArrowRight") {
       newDirections[0]++;
+      newDirections[0] = Math.min(this.state.moveMax,newDirections[0]);
     }
     this.setState({
       directions: newDirections
