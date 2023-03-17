@@ -41,6 +41,13 @@ class Panel extends React.Component {
             <div>Pac-Man Walls:</div>
             <div> {state.pacManWalls ? "ON" : "OFF"}</div>
           </div>
+          <div className="container" onClick={() => {togglePacManWalls()}}>
+            <div> </div>
+          </div>
+          <div className="container" onClick={() => {togglePacManWalls()}}>
+            <div>Goal:</div>
+            <div>  {state.goalX}, {-state.goalY}</div>
+          </div>
         </div>
       </div>
     );

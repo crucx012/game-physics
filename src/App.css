@@ -45,6 +45,10 @@ body {
   transition: margin-left 1s;
 }
 
+.goal {
+  opacity: .5;
+}
+
 .expand {
   position: absolute;
   height: 50px;
@@ -67,6 +71,11 @@ body {
   transition-delay: .2s;
 }
 
+.large {
+  height: 200px;
+  width: 200px;
+}
+
 .medium {
   height: 50px;
   width: 50px;
@@ -79,6 +88,11 @@ body {
 
 .circle {
   border-radius: 50%;
+}
+
+.orange {
+  background-color: orange;
+  position: absolute;
 }
 
 .gray {

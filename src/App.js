@@ -1,6 +1,7 @@
 import React from 'react';
 import Panel from './components/Panel.jsx';
 import Grid from './components/Grid.jsx';
+import Goal from './components/Goal.jsx';
 import Player from './components/Player.jsx';
 import './App.css';
 
@@ -15,6 +16,8 @@ class App extends React.Component {
       y: 0,
       xOffset: window.innerWidth / 2,
       yOffset: window.innerHeight / 2,
+      goalX: this.getRandomInt(20000) - 10000,
+      goalY: this.getRandomInt(20000) - 10000,
       move: 1,
       moveMax: 30,
       freeze: false,
@@ -27,6 +30,11 @@ class App extends React.Component {
     this.togglePanel = this.togglePanel.bind(this);
     this.togglePacManWalls = this.togglePacManWalls.bind(this);
   }
+
+  getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
 
   handleKeyDown(event) {
     let {directions: newDirections} = this.state;
@@ -122,6 +130,8 @@ class App extends React.Component {
         togglePanel={this.togglePanel}
         togglePacManWalls={this.togglePacManWalls}/>
         <Grid
+        state={this.state}/>
+        <Goal
         state={this.state}/>
         <Player
         state={this.state} />
