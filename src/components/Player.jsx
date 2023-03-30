@@ -11,37 +11,37 @@ class Player extends React.Component {
   }
 
   getMarkers(props) {
-    let {x,y,xOffset,yOffset,pacManWalls} = this.props.state;
+    let {x,y,xOffset,yOffset,width,height,pacManWalls} = this.props.state;
     let size = 50;
     let left = xOffset - (size / 2);
     let top = yOffset - (size / 2);
     if (pacManWalls) {
-      left += ((x % window.innerWidth) + window.innerWidth) % window.innerWidth;
-      top += ((y % window.innerHeight) + window.innerHeight) % window.innerHeight;
+      left += ((x % width) + width) % width;
+      top += ((y % height) + height) % height;
     }
-    return this.getClones(left,top,size);
+    return this.getClones(left,top,width,height,size);
   }
 
-  getClones(x,y,size) {
+  getClones(x,y,width,height,size) {
     let result = [];
     for (let i = 0; i < 2; i++) {
       for (let j = 0; j < 2; j++){
-        result.push(this.getMarker(x,y,i,j,size))
+        result.push(this.getMarker(x,y,i,j,width,height,size))
       }
     }
     return result;
   }
 
-  getMarker(x,y,i,j,size) {
+  getMarker(x,y,i,j,width,height,size) {
     let top = y;
     if (i > 0) {
-      top -= window.innerHeight;
+      top -= height;
     }
     let left = x;
     if (j > 0) {
-      left -= window.innerWidth;
+      left -= width;
     }
-    if (this.isVisible(top,left,size)) {
+    if (this.isVisible(top,left,width,height,size)) {
       const style = {
         'marginTop': `${top}px`,
         'marginLeft': `${left}px`,
@@ -52,9 +52,9 @@ class Player extends React.Component {
     }
   }
 
-  isVisible(top,left,size) {
-    return ((top >= 0 && top <= window.innerHeight) || (top + size >= 0 && top + size <= window.innerHeight))
-      && ((left >= 0 && left <= window.innerWidth) || (left + size >= 0 && left + size <= window.innerWidth))
+  isVisible(top,left,width,height,size) {
+    return ((top >= 0 && top <= height) || (top + size >= 0 && top + size <= height))
+      && ((left >= 0 && left <= width) || (left + size >= 0 && left + size <= width))
   }
 }
 

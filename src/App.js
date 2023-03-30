@@ -1,8 +1,6 @@
 import React from 'react';
 import Panel from './components/Panel.jsx';
-import Grid from './components/Grid.jsx';
-import Goal from './components/Goal.jsx';
-import Player from './components/Player.jsx';
+import Window from './components/Window.jsx';
 import './App.css';
 
 let interval;
@@ -10,12 +8,16 @@ let interval;
 class App extends React.Component {
   constructor(props){
     super(props);
+    const width = Math.floor(window.innerWidth / 100) * 100;
+    const height = Math.floor(window.innerHeight / 100) * 100;
     this.state = {
       directions: [0, 0],
       x: 0,
       y: 0,
-      xOffset: window.innerWidth / 2,
-      yOffset: window.innerHeight / 2,
+      xOffset: width / 2,
+      yOffset: height / 2,
+      width: width,
+      height: height,
       goalX: this.getRandomInt(20000) - 10000,
       goalY: this.getRandomInt(20000) - 10000,
       move: 1,
@@ -57,11 +59,11 @@ class App extends React.Component {
   }
 
   move() {
-    let {xOffset, yOffset, freeze, freezeUntil} = this.state;
-    const newXOffset = window.innerWidth / 2;
-    const newYOffset = window.innerHeight / 2;
-    if (xOffset !== newXOffset || yOffset !== newYOffset) {
-      this.pause(newXOffset, newYOffset);
+    let {width, height, freeze, freezeUntil} = this.state;
+    const newWidth = Math.floor(window.innerWidth / 100) * 100;
+    const newHeight = Math.floor(window.innerHeight / 100) * 100;
+    if (width !== newWidth || height !== newHeight) {
+      this.pause(newWidth, newHeight);
       return;
     } else if (freeze) {
       if (new Date().getTime() >= freezeUntil.getTime()) {
@@ -86,14 +88,16 @@ class App extends React.Component {
     })
   }
 
-  pause(newXOffset, newYOffset) {
+  pause(newWidth, newHeight) {
     var date = new Date();
     date.setMilliseconds(date.getMilliseconds() + 500);
     this.setState({
       freeze: true,
       freezeUntil: date,
-      xOffset: newXOffset,
-      yOffset: newYOffset
+      xOffset: newWidth / 2,
+      yOffset: newHeight / 2,
+      width: newWidth,
+      height: newHeight
     });
   }
 
@@ -129,12 +133,8 @@ class App extends React.Component {
         state={this.state}
         togglePanel={this.togglePanel}
         togglePacManWalls={this.togglePacManWalls}/>
-        <Grid
+        <Window
         state={this.state}/>
-        <Goal
-        state={this.state}/>
-        <Player
-        state={this.state} />
       </div>
     )
   }

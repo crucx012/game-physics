@@ -11,7 +11,7 @@ class Grid extends React.Component {
   }
 
   getMarkers(props) {
-    let {x,y,xOffset,yOffset,pacManWalls} = this.props.state;
+    let {x,y,xOffset,yOffset,width,height,pacManWalls} = this.props.state;
     let size = 10;
     let left = xOffset - (Math.round(xOffset / 100) * 100) - (size / 2);
     let top = yOffset - (Math.round(yOffset / 100) * 100) - (size / 2)
@@ -19,25 +19,23 @@ class Grid extends React.Component {
       left += -x + (Math.round(x / 100) * 100);
       top += -y + (Math.round(y / 100) * 100);
     }
-    return this.getClones(left, top, size);
+    return this.getClones(left, top, width, height, size);
   }
 
-  getClones(x,y,size) {
+  getClones(x,y,width,height,size) {
     let result = [];
     let spacing = 100;
-    for (let i = 0; i < window.innerWidth; i++) {
-      for (let j = 0; j < window.innerHeight; j++) {
-        result.push(this.getMarker(x+i,y+j,size));
-        j += spacing - 1;
+    for (let i = 0; i <= width; i+=spacing) {
+      for (let j = 0; j <= height; j+=spacing) {
+        result.push(this.getMarker(x+i,y+j,width,height,size));
       }
-      i += spacing - 1;
     }
     return result;
   }
 
-  getMarker(x, y, size) {
+  getMarker(x, y, width, height, size) {
     let result = [];
-    if (this.isVisible(x,y,size)) {
+    if (this.isVisible(x,y,width,height,size)) {
       const style = {
         'marginTop': `${y}px`,
         'marginLeft': `${x}px`,
@@ -49,9 +47,9 @@ class Grid extends React.Component {
     return result;
   }
 
-  isVisible(left,top,size) {
-    return ((top >= 0 && top <= window.innerHeight) || (top + size >= 0 && top + size <= window.innerHeight))
-      && ((left >= 0 && left <= window.innerWidth) || (left + size >= 0 && left + size <= window.innerWidth))
+  isVisible(left,top,width,height,size) {
+    return ((top >= 0 && top <= height) || (top + size >= 0 && top + size <= height))
+      && ((left >= 0 && left <= width) || (left + size >= 0 && left + size <= width))
   }
 }
 

@@ -15,6 +15,14 @@ body {
   color: white;
 }
 
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -63,7 +71,7 @@ body {
   background-color: #302e36;
 }
 
-.center {
+.text-center {
   position: absolute;
   top: 50%;
   left: 50%;
