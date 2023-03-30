@@ -13,20 +13,15 @@ class Goal extends React.Component {
   getMarker(props) {
     let {x,y,goalX,goalY,xOffset,yOffset,pacManWalls} = this.props.state;
     let radius = 100;
-    let left = goalX + xOffset - radius;
-    let top = goalY + yOffset - radius;
     let screenLeft = x - xOffset;
     let screenTop = y - yOffset;
     if (pacManWalls) {
-      left = ((left % window.innerWidth) + window.innerWidth) % window.innerWidth;
-      top = ((top % window.innerHeight) + window.innerHeight) % window.innerHeight;
       screenLeft = -xOffset + Math.round(x / window.innerWidth) * window.innerWidth;
       screenTop = -yOffset + Math.round(y / window.innerHeight) * window.innerHeight;
-    } else {
-      left -= x;
-      top -= y;
     }
-    if (this.isVisible(screenLeft,screenTop,goalX,goalY,radius*2)) {
+    let left = goalX - radius - screenLeft;
+    let top = goalY - radius - screenTop;
+    if (this.isVisible(left,top,radius*2)) {
       const style = {
         'marginTop': `${top}px`,
         'marginLeft': `${left}px`,
@@ -37,9 +32,9 @@ class Goal extends React.Component {
     }
   }
 
-  isVisible(screenLeft,screenTop,left,top,size) {
-    return ((top >= screenTop && top <= screenTop + window.innerHeight) || (top + size >= screenTop && top + size <= screenTop + window.innerHeight))
-      && ((left >= screenLeft && left <= screenLeft + window.innerWidth) || (left + size >= screenLeft && left + size <= screenLeft + window.innerWidth))
+  isVisible(left,top,size) {
+    return ((top >= 0 && top <= window.innerHeight) || (top + size >= 0 && top + size <= window.innerHeight))
+      && ((left >= 0 && left <= window.innerWidth) || (left + size >= 0 && left + size <= window.innerWidth))
   }
 }
 
