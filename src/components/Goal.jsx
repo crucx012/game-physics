@@ -33,8 +33,8 @@ class Goal extends React.Component {
   }
 
   isVisible(left,top,width,height,size) {
-    return ((top >= 0 && top <= height) || (top + size >= 0 && top + size <= height))
-      && ((left >= 0 && left <= width) || (left + size >= 0 && left + size <= width))
+    return ((top >= 0 && top <= height) || (top + size >= 0 && top + size <= height) || (top <= 0 && top + size >= height))
+      && ((left >= 0 && left <= width) || (left + size >= 0 && left + size <= width) || (left <= 0 && left + size >= width))
   }
 }
 

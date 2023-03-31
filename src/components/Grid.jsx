@@ -15,7 +15,7 @@ class Grid extends React.Component {
     let size = 10;
     const widthMod = Math.round((width / 15) / 100) * 100;
     const heightMod = Math.round((height / 15) / 100) * 100;
-    const mod = Math.max(widthMod,heightMod);
+    const mod = Math.max(Math.max(widthMod,heightMod),100);
     let left = xOffset - (Math.round(xOffset / mod) * mod) - (size / 2);
     let top = yOffset - (Math.round(yOffset / mod) * mod) - (size / 2)
     if (!pacManWalls) {
