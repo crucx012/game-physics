@@ -13,21 +13,26 @@ class Grid extends React.Component {
   getMarkers(props) {
     let {x,y,xOffset,yOffset,width,height,pacManWalls} = this.props.state;
     let size = 10;
-    let left = xOffset - (Math.round(xOffset / 100) * 100) - (size / 2);
-    let top = yOffset - (Math.round(yOffset / 100) * 100) - (size / 2)
+    const widthMod = Math.round((width / 15) / 100) * 100;
+    const heightMod = Math.round((height / 15) / 100) * 100;
+    const mod = Math.max(widthMod,heightMod);
+    let left = xOffset - (Math.round(xOffset / mod) * mod) - (size / 2);
+    let top = yOffset - (Math.round(yOffset / mod) * mod) - (size / 2)
     if (!pacManWalls) {
-      left += -x + (Math.round(x / 100) * 100);
-      top += -y + (Math.round(y / 100) * 100);
+      left += -x + (Math.round(x / mod) * mod);
+      top += -y + (Math.round(y / mod) * mod);
     }
-    return this.getClones(left, top, width, height, size);
+    return this.getClones(left, top, width, height, mod, size);
   }
 
-  getClones(x,y,width,height,size) {
+  getClones(x,y,width,height,mod,size) {
     let result = [];
     let spacing = 100;
     for (let i = 0; i <= width; i+=spacing) {
       for (let j = 0; j <= height; j+=spacing) {
-        result.push(this.getMarker(x+i,y+j,width,height,size));
+        if (i % mod === 0 && j % mod === 0) {
+          result.push(this.getMarker(x+i,y+j,width,height,size));
+        }
       }
     }
     return result;
