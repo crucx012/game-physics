@@ -2,6 +2,7 @@ import React from 'react';
 import Grid from './Grid.jsx';
 import Goal from './Goal.jsx';
 import Player from './Player.jsx';
+import Guide from './Guide.jsx';
 
 class Window extends React.Component {
   render() {
@@ -22,6 +23,8 @@ class Window extends React.Component {
           <Goal
           state={state}/>
           <Player
+          state={state} />
+          <Guide
           state={state} />
         </div>
       </div>
