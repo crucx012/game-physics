@@ -11,29 +11,46 @@ class Guide extends React.Component {
   }
 
   getMarker(props) {
-    let {x,y,goalX,goalY,xOffset,yOffset,width,height} = this.props.state;
+    let {x,y,goalX,goalY,xOffset,yOffset,pacManWalls,width,height} = this.props.state;
     let radius = 25;
     const a = goalX - x;
     const b = goalY - y;
     const c = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
-    const deg = Math.atan2(b, a) * 180 / Math.PI + 90;
-    let left = xOffset - radius;
-    let top = yOffset - (radius / 2);
-    if (this.isVisible(left,top,width,height,radius*2) && c > 125) {
+    if (c > 100) {
+      const deg = Math.atan2(b, a) * 180 / Math.PI + 90;
+      let left = xOffset - radius;
+      let top = yOffset - (radius / 2);
+      const rotate = `rotate(${deg}deg)`;
+      let transform = rotate;
+      if (!pacManWalls) {
+        transform += ` translateY(-50px)`;
+      } else {
+        let rise = -(goalY - y);
+        let run = goalX - x;
+        let slope = rise / run;
+        let pageSlope = height / width;
+        let distance = 0;
+        if (rise === 0 ) {
+          distance = -(xOffset - 50);
+        } else if (run === 0) {
+          distance = -(yOffset - 50);
+        } else if ((slope > pageSlope && slope > 0)
+          || (-slope > pageSlope && slope < 0)) {
+          distance = -Math.sqrt(Math.pow(yOffset,2) + Math.pow(yOffset * (1 / slope),2)) + 50;
+        } else {
+          distance = -Math.sqrt(Math.pow(xOffset,2) + Math.pow(xOffset * slope,2)) + 50;
+        }
+        transform += ` translateY(${distance}px)`;
+      }
       const style = {
         'marginTop': `${top}px`,
         'marginLeft': `${left}px`,
-        'transform': `rotate(${deg}deg) translateY(-50px)`
+        'transform': transform
       }
       return (
         <div className="triangle" style={style}></div>
       );
     }
-  }
-
-  isVisible(left,top,width,height,size) {
-    return ((top >= 0 && top <= height) || (top + size >= 0 && top + size <= height))
-      && ((left >= 0 && left <= width) || (left + size >= 0 && left + size <= width))
   }
 }
 
