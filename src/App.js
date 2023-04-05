@@ -41,21 +41,37 @@ class App extends React.Component {
   handleKeyDown(event) {
     let {directions: newDirections} = this.state;
     if (event.key === 'w' || event.key === "ArrowUp") {
-      newDirections[1]++;
-      newDirections[1] = Math.min(this.state.moveMax,newDirections[1]);
+      if (newDirections[0] !== 0 && newDirections[1] === this.state.moveMax) {
+        newDirections[0] = this.moveTowardZero(newDirections[0]);
+      }
+      newDirections[1] = Math.min(this.state.moveMax,newDirections[1] + 1);
     } else if (event.key === 'a' || event.key === "ArrowLeft") {
-      newDirections[0]--;
-      newDirections[0] = Math.max(-this.state.moveMax,newDirections[0]);
+      if (newDirections[1] !== 0 && newDirections[0] === -this.state.moveMax) {
+        newDirections[1] = this.moveTowardZero(newDirections[1]);
+      }
+      newDirections[0] = Math.max(-this.state.moveMax,newDirections[0] - 1);
     } else if (event.key === 's' || event.key === "ArrowDown") {
-      newDirections[1]--;
-      newDirections[1] = Math.max(-this.state.moveMax,newDirections[1]);
+      if (newDirections[0] !== 0 && newDirections[1] === -this.state.moveMax) {
+        newDirections[0] = this.moveTowardZero(newDirections[0]);
+      }
+      newDirections[1] = Math.max(-this.state.moveMax,newDirections[1] - 1);
     } else if (event.key === 'd' || event.key === "ArrowRight") {
-      newDirections[0]++;
-      newDirections[0] = Math.min(this.state.moveMax,newDirections[0]);
+      if (newDirections[1] !== 0 && newDirections[0] === this.state.moveMax) {
+        newDirections[1] = this.moveTowardZero(newDirections[1]);
+      }
+      newDirections[0] = Math.min(this.state.moveMax,newDirections[0] + 1);
     }
     this.setState({
       directions: newDirections
     })
+  }
+
+  moveTowardZero(val) {
+    if (Math.sign(val) === 1) {
+      return val - 1;
+    } else if (Math.sign(val) === -1) {
+      return val + 1;
+    }
   }
 
   move() {
