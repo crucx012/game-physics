@@ -10,6 +10,7 @@ class App extends React.Component {
     super(props);
     const width = Math.floor(window.innerWidth / 100) * 100;
     const height = Math.floor(window.innerHeight / 100) * 100;
+    const goal = this.getRandomCoordinates();
     this.state = {
       directions: [0, 0],
       x: 0,
@@ -18,8 +19,9 @@ class App extends React.Component {
       yOffset: height / 2,
       width: width,
       height: height,
-      goalX: this.getRandomInt(20000) - 10000,
-      goalY: this.getRandomInt(20000) - 10000,
+      goalX: goal[0],
+      goalY: goal[1],
+      goals: 0,
       move: 1,
       moveMax: 30,
       freeze: false,
@@ -94,13 +96,29 @@ class App extends React.Component {
   }
 
   handleMove() {
-    let {x: newX, y: newY, move, directions} = this.state;
+    let {x: newX, y: newY, goalX, goalY, goals, move, directions} = this.state;
     newX += move * directions[0];
     newY -= move * directions[1];
+    const a = goalX - newX;
+    const b = goalY - newY;
+    const c = Math.sqrt(Math.pow(a,2)+Math.pow(b,2));
+    if (c < 100) {
+      this.getNextGoal(goals);
+    }
     this.setState({
       freeze: false,
       x: newX,
       y: newY
+    })
+  }
+
+  getNextGoal(goals) {
+    goals++;
+    const newGoal = this.getRandomCoordinates();
+    this.setState({
+      goals: goals,
+      goalX: newGoal[0],
+      goalY: newGoal[1]
     })
   }
 
@@ -128,6 +146,10 @@ class App extends React.Component {
     this.setState({
       pacManWalls: newVal
     })
+  }
+
+  getRandomCoordinates() {
+    return [this.getRandomInt(20000) - 10000,this.getRandomInt(20000) - 10000];
   }
 
   componentDidMount(){

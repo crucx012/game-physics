@@ -43,7 +43,11 @@ class Panel extends React.Component {
           </div>
           <div className="container">
             <div>Goal:</div>
-            <div>  {state.goalX}, {-state.goalY}</div>
+            <div> {state.goalX}, {-state.goalY}</div>
+          </div>
+          <div className="container">
+            <div>Goals Acheived:</div>
+            <div>{state.goals}</div>
           </div>
         </div>
       </div>
