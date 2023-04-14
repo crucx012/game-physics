@@ -3,7 +3,7 @@ import Panel from './components/Panel.jsx';
 import Window from './components/Window.jsx';
 import './App.css';
 
-let interval;
+let interval; 
 
 class App extends React.Component {
   constructor(props){
