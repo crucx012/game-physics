@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "https://crucx012.github.io/game-physics/static/css/main.d2e27e29.css",
+    "main.js": "https://crucx012.github.io/game-physics/static/js/main.892fc44f.js",
+    "static/js/787.95e13929.chunk.js": "https://crucx012.github.io/game-physics/static/js/787.95e13929.chunk.js",
+    "index.html": "https://crucx012.github.io/game-physics/index.html",
+    "main.d2e27e29.css.map": "https://crucx012.github.io/game-physics/static/css/main.d2e27e29.css.map",
+    "main.892fc44f.js.map": "https://crucx012.github.io/game-physics/static/js/main.892fc44f.js.map",
+    "787.95e13929.chunk.js.map": "https://crucx012.github.io/game-physics/static/js/787.95e13929.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d2e27e29.css",
+    "static/js/main.892fc44f.js"
+  ]
+}
